@@ -488,5 +488,23 @@
             "capacity": 9
         },
         "zones": []
+    },
+    {
+        "Name": "redis-Q",
+        "type": "Microsoft.Cache/redis",
+        "apiVersion": "2021-06-01",
+        "location": "centralus",
+        "dependsOn": [],
+        "properties": {
+            "sku": {
+                "name": "Standard",
+                "family": "C",
+                "capacity": 1
+            },
+            "redisConfiguration": {},
+            "enableNonSslPort": false,
+            "redisVersion": "6"
+        },
+        "tags": {}
     }
 ]

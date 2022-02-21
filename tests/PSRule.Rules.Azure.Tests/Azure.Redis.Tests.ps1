@@ -34,7 +34,7 @@ Describe 'Azure.Redis' -Tag 'Redis' {
                 WarningAction = 'Ignore'
                 ErrorAction = 'Stop'
             }
-            $dataPath = Join-Path -Path $here -ChildPath 'Resources.Redis.json';
+            $dataPath = Join-Path -Path $here -ChildPath 'Resources.Redis.json';            
             $result = Invoke-PSRule @invokeParams -InputPath $dataPath -Outcome All;
         }
 
@@ -52,6 +52,22 @@ Describe 'Azure.Redis' -Tag 'Redis' {
             $ruleResult | Should -Not -BeNullOrEmpty;
             $ruleResult.Length | Should -Be 9;
             $ruleResult.TargetName | Should -BeIn 'redis-A', 'redis-C', 'redis-D', 'redis-E', 'redis-F', 'redis-G', 'redis-H', 'redis-I', 'redis-J', 'redis-K', 'redis-L', 'redis-M', 'redis-N', 'redis-O', 'redis-P';
+        }
+
+        It 'Azure.Redis.Version' {
+            $filteredResult = $result | Where-Object { $_.RuleName -eq 'Azure.Redis.Version' };
+
+            # Fail
+            $ruleResult = @($filteredResult | Where-Object { $_.Outcome -eq 'Fail' });
+            $ruleResult | Should -Not -BeNullOrEmpty;
+            $ruleResult.Length | Should -Be 1+9;
+            $ruleResult.TargetName | Should -BeIn 'redis-A', 'redis-B', 'redis-C', 'redis-D', 'redis-E', 'redis-F', 'redis-G', 'redis-H', 'redis-I', 'redis-J', 'redis-K', 'redis-L', 'redis-M', 'redis-N', 'redis-O', 'redis-P';
+
+            # Pass
+            $ruleResult = @($filteredResult | Where-Object { $_.Outcome -eq 'Pass' });
+            $ruleResult | Should -Not -BeNullOrEmpty;
+            $ruleResult.Length | Should -Be 1;
+            $ruleResult.TargetName | Should -BeIn 'redis-Q';
         }
 
         It 'Azure.Redis.MinTLS' {

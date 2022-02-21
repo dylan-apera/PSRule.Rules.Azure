@@ -1,0 +1,159 @@
+{
+    "ResourceId":  "/subscriptions/35bdd8ab-9f7c-4480-b9b3-ce99895fa80d/resourcegroups/digitane-asc-export/providers/Microsoft.Security/automations/ExportToWorkspace",
+    "Id":  "/subscriptions/35bdd8ab-9f7c-4480-b9b3-ce99895fa80d/resourcegroups/digitane-asc-export/providers/Microsoft.Security/automations/ExportToWorkspace",
+    "Identity":  null,
+    "Kind":  null,
+    "Location":  "australiaeast",
+    "ManagedBy":  null,
+    "ResourceName":  "ExportToWorkspace",
+    "Name":  "ExportToWorkspace",
+    "ExtensionResourceName":  null,
+    "ParentResource":  null,
+    "Plan":  null,
+    "Properties":  {
+                       "description":  "Export Azure Security Center data to Log Analytics workspace via policy",
+                       "isEnabled":  true,
+                       "metadata":  {
+                                        "createdDateTimeUtc":  "2021-10-30T05:21:08.6845526Z",
+                                        "createdBy":  "4a8478d4-8a83-4d61-a595-4e94b21f54b4",
+                                        "lastUpdatedDateTimeUtc":  "2021-10-30T05:21:08.6845526Z",
+                                        "lastUpdatedBy":  "4a8478d4-8a83-4d61-a595-4e94b21f54b4"
+                                    },
+                       "scopes":  [
+                                      {
+                                          "description":  "scope for subscription 35bdd8ab-9f7c-4480-b9b3-ce99895fa80d",
+                                          "scopePath":  "/subscriptions/35bdd8ab-9f7c-4480-b9b3-ce99895fa80d"
+                                      }
+                                  ],
+                       "sources":  [
+                                       {
+                                           "eventSource":  "SubAssessments"
+                                       },
+                                       {
+                                           "eventSource":  "Assessments",
+                                           "ruleSets":  [
+                                                            {
+                                                                "rules":  [
+                                                                              {
+                                                                                  "propertyJPath":  "type",
+                                                                                  "propertyType":  "String",
+                                                                                  "expectedValue":  "Microsoft.Security/assessments",
+                                                                                  "operator":  "Contains"
+                                                                              },
+                                                                              {
+                                                                                  "propertyJPath":  "properties.metadata.severity",
+                                                                                  "propertyType":  "String",
+                                                                                  "expectedValue":  "High",
+                                                                                  "operator":  "Equals"
+                                                                              }
+                                                                          ]
+                                                            },
+                                                            {
+                                                                "rules":  [
+                                                                              {
+                                                                                  "propertyJPath":  "type",
+                                                                                  "propertyType":  "String",
+                                                                                  "expectedValue":  "Microsoft.Security/assessments",
+                                                                                  "operator":  "Contains"
+                                                                              },
+                                                                              {
+                                                                                  "propertyJPath":  "properties.metadata.severity",
+                                                                                  "propertyType":  "String",
+                                                                                  "expectedValue":  "Medium",
+                                                                                  "operator":  "Equals"
+                                                                              }
+                                                                          ]
+                                                            },
+                                                            {
+                                                                "rules":  [
+                                                                              {
+                                                                                  "propertyJPath":  "type",
+                                                                                  "propertyType":  "String",
+                                                                                  "expectedValue":  "Microsoft.Security/assessments",
+                                                                                  "operator":  "Contains"
+                                                                              },
+                                                                              {
+                                                                                  "propertyJPath":  "properties.metadata.severity",
+                                                                                  "propertyType":  "String",
+                                                                                  "expectedValue":  "Low",
+                                                                                  "operator":  "Equals"
+                                                                              }
+                                                                          ]
+                                                            }
+                                                        ]
+                                       },
+                                       {
+                                           "eventSource":  "Alerts",
+                                           "ruleSets":  [
+                                                            {
+                                                                "rules":  [
+                                                                              {
+                                                                                  "propertyJPath":  "Severity",
+                                                                                  "propertyType":  "String",
+                                                                                  "expectedValue":  "high",
+                                                                                  "operator":  "Equals"
+                                                                              }
+                                                                          ]
+                                                            },
+                                                            {
+                                                                "rules":  [
+                                                                              {
+                                                                                  "propertyJPath":  "Severity",
+                                                                                  "propertyType":  "String",
+                                                                                  "expectedValue":  "medium",
+                                                                                  "operator":  "Equals"
+                                                                              }
+                                                                          ]
+                                                            },
+                                                            {
+                                                                "rules":  [
+                                                                              {
+                                                                                  "propertyJPath":  "Severity",
+                                                                                  "propertyType":  "String",
+                                                                                  "expectedValue":  "low",
+                                                                                  "operator":  "Equals"
+                                                                              }
+                                                                          ]
+                                                            }
+                                                        ]
+                                       },
+                                       {
+                                           "eventSource":  "SecureScores"
+                                       },
+                                       {
+                                           "eventSource":  "SecureScoreControls"
+                                       },
+                                       {
+                                           "eventSource":  "RegulatoryComplianceAssessment"
+                                       },
+                                       {
+                                           "eventSource":  "SecureScoresSnapshot"
+                                       },
+                                       {
+                                           "eventSource":  "SecureScoreControlsSnapshot"
+                                       },
+                                       {
+                                           "eventSource":  "RegulatoryComplianceAssessmentSnapshot"
+                                       }
+                                   ],
+                       "actions":  [
+                                       {
+                                           "workspaceResourceId":  "/subscriptions/29e9fd30-c044-4ca5-a41c-aacdb3c44a9a/resourceGroups/digitane-mgmt/providers/Microsoft.OperationalInsights/workspaces/digitane-law",
+                                           "actionType":  "Workspace"
+                                       }
+                                   ]
+                   },
+    "ResourceGroupName":  "digitane-asc-export",
+    "Type":  "Microsoft.Security/automations",
+    "ResourceType":  "Microsoft.Security/automations",
+    "ExtensionResourceType":  null,
+    "Sku":  null,
+    "Tags":  {
+
+             },
+    "TagsTable":  null,
+    "SubscriptionId":  "35bdd8ab-9f7c-4480-b9b3-ce99895fa80d",
+    "CreatedTime":  null,
+    "ChangedTime":  null,
+    "ETag":  "\"5f028275-0000-0d00-0000-61fc3a600000\""
+}
