@@ -7,7 +7,8 @@
 
 # Synopsis: Redis Cache (Azure cache for Redis) should use Redis 6.0 or later
 Rule 'Azure.Redis.Version' -Type 'Microsoft.Cache/Redis' -Tag @{ release = 'GA'; ruleSet = '2022_03' } {
-    $Assert.Version($TargetObject, 'Properties.redisVersion', '>=6.0'); 
+    if ($Assert.HasFieldValue($TargetObject, 'Properties.redisVersion').result){
+    $Assert.Version($TargetObject, 'Properties.redisVersion', '>=6.0');} 
 }
 
 # Synopsis: Use Azure Cache for Redis instances of at least Standard C1.
